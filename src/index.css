@@ -1,0 +1,119 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: auto;
+  background-color: #071952;
+}
+div#root {
+  max-width: 768px;
+  margin: auto;
+  background-color: #fff;
+  padding-bottom: 110px;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  max-width: 768px;
+  margin: auto;
+  right: 0;
+}
+.card-body h3 {
+  margin: auto;
+}
+.mt-5 {
+  margin-top: 30px;
+}
+.text-center {
+  text-align: center !important;
+}
+table {
+  overflow: auto !important;
+}
+.showBalance {
+  display: inline-block !important;
+  left: 35px !important;
+  font-size: 15px !important;
+  top: 2px !important;
+  transition: 0.5s !important;
+}
+.hideBalance {
+  display: none !important;
+  transition: 0.5s !important;
+}
+.noneText {
+  display: none !important;
+  transition: 0.5s !important;
+}
+.planButton {
+  cursor: pointer;
+}
+.clickbtn {
+  cursor: pointer;
+}
+.cryptoLink {
+  max-width: 94px !important;
+}
+.number-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.gatwaydivshadow .input-group select {
+  width: 80%;
+  margin-left: 10px;
+  font-size: 16px;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+.gatwaydivshadow .input-group input {
+  width: 100%;
+  margin-left: 10px;
+  font-size: 16px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  border: 1px solid #808080 !important;
+}
+.footerContainer {
+  height: 90px;
+}
+.planButton {
+  width: auto;
+}
+table {
+  width: 100%;
+}
+form.refflex {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+#cardstyle {
+  overflow-x: auto;
+  background: white;
+  box-shadow: 7px 5px 14px #ededed;
+  border: none;
+}
+div#AdminBody {
+  height: 100vh;
+}
+div#adminhome {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-between;
+  gap: 50px;
+  margin-top: 40px;
+}
+.profilelogo {
+  width: 40%;
+}

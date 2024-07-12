@@ -1,0 +1,176 @@
+@media only screen and (max-width: 768px) {
+
+    *body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .diposits {
+        background-color: #6a3093;
+        padding: 10px;
+    }
+
+    .diposit-header {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: #fff;
+        width: 100%; 
+    }
+
+    i.bi.bi-chevron-left {
+        font-size: 20px;
+        color: white;
+    }
+
+    .diposit-header h2 {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .vip1 {
+        color: #696969;
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    .body-area p {
+        font-size: 14px;
+        font-weight: 500;
+        color: #696969;
+    }
+    .allplan{
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        gap: 10px 10px;
+        width: 100%;
+        height: 100%;
+        margin: 20px;
+    }
+    .plancontent {
+        background: white;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        width: 90%;
+
+    }
+    .planButton {
+        background-color: rgb(240, 33, 130);
+        border-radius: 20px;
+        padding: 10px;
+        width: 20%;
+        color: #fff;
+        border: none;
+        
+    }
+    .card-header{
+        text-align: center;
+         margin: 10px 0;
+         font-weight: bold;
+    }
+    .card-body{
+        text-align: center;
+        margin: 10px 0;
+    }
+    .card-footer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+}
+
+
+@media only screen and (min-width: 769px) {
+
+
+    *body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .diposits {
+        background-color: #6a3093;
+        padding: 10px;
+
+    }
+
+    .diposit-header {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: #fff;
+    }
+
+    i.bi.bi-chevron-left {
+        font-size: 25px;
+        color: white;
+    }
+
+    .diposit-header h2 {
+        font-size: 18px;
+        font-weight: bold;
+
+    }
+
+    .vip1 {
+        color: #696969;
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    .body-area p {
+        font-size: 14px;
+        font-weight: 500;
+        color: #696969;
+    }
+    .allplan{
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px 10px;
+        width: 100%;
+        height: 100%;
+        margin: 20px;
+    }
+
+    .plancontent {
+        background: white;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        width: 90%;
+
+    }
+
+    .planButton {
+        background-color: rgb(240, 33, 130);
+        border-radius: 20px;
+        padding: 10px;
+        width: 30%;
+        color: #fff;
+        border: none;
+        
+    }
+    .card-header{
+        text-align: center;
+         margin: 10px 0;
+         font-weight: bold;
+    }
+    .card-body{
+        text-align: center;
+        margin: 10px 0;
+    }
+    .card-footer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+
+}

@@ -1,0 +1,124 @@
+@media only screen and (max-width: 768px) {
+
+    *body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .diposits {
+        background-color: #6a3093;
+        padding: 10px;
+    }
+
+    .diposit-header {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: #fff;
+        width: 100%;
+    }
+
+    i.bi.bi-chevron-left {
+        font-size: 20px;
+        color: white;
+    }
+
+    .diposit-header h2 {
+        font-size: 14px;
+        font-weight: bold;
+    }
+.jobinput{
+    width: 70%;
+    height: 40px;
+    margin-left: 100px;
+    margin: 10px;
+    border-radius: 5px;
+    padding-left: 5px;
+    border: 1px solid rgb(240, 33, 130) ;
+  }
+ .jobcontent h6{
+    font-weight: 800;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-top: 10px;
+ }
+
+ .refbutton{
+    height: 40px;
+   width: 60px;
+    margin-top: 20px;
+    background-color: rgb(240, 33, 130);
+    color: white;
+    border-radius: 8px;
+    border: none;
+     cursor: pointer;
+    
+ }
+
+}
+
+
+
+@media only screen and (min-width: 769px) {
+
+
+    *body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .diposits {
+        background-color: #6a3093;
+        padding: 10px;
+
+    }
+
+    .diposit-header {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: #fff;
+    }
+
+    i.bi.bi-chevron-left {
+        font-size: 25px;
+        color: white;
+    }
+
+    .diposit-header h2 {
+        font-size: 18px;
+        font-weight: bold;
+
+    }
+    .jobinput{
+        width: 90%;
+        height: 40px;
+        margin-left: 100px;
+        margin: 10px;
+        border-radius: 5px;
+        padding-left: 5px;
+        border: 1px solid rgb(240, 33, 130) ;
+      }
+     .jobcontent h6{
+        font-weight: 800;
+        font-size: 20px;
+        margin-left: 20px;
+        margin-top: 10px;
+     }
+    
+     .refbutton{
+        height: 40px;
+       width: 60px;
+        margin-top: 20px;
+        background-color: rgb(240, 33, 130);
+        color: white;
+        border-radius: 8px;
+        border: none;
+        
+     }
+
+
+
+}

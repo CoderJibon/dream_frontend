@@ -1,0 +1,92 @@
+
+
+
+   @media only screen and (min-width: 769px) {
+    .body{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+     }
+      .background-img img{
+        border-radius: 20px;
+        padding: 20px;
+        width: 100%;
+       }
+       .container{
+        width: 100%;
+        padding: 10px;
+       }
+       .iconImgCss {
+        width: 45px; 
+      }
+      .shadow-area{
+       width: 100%;
+        padding: 10px 0;
+        box-shadow: 0px 5px 20px #d9d9d9;
+       }
+    
+       .all-content{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 25px;
+       }
+       .iconPage{
+        text-align: center;
+       }
+       .iconPage span{
+        color: #007bff;
+        font-size: 10px;
+        text-align: center;
+       }
+       .shadow-area .background-img img{
+        border-radius: 10px;
+        padding: 5px;
+       }
+
+  }
+   @media only screen and (max-width: 768px) {
+    .body{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+     }
+      .background-img img{
+        border-radius: 20px;
+        padding: 20px;
+        width: 98%;
+       }
+       .container{
+        width: 100%;
+        padding: 10px;
+       }
+       .iconImgCss {
+        width: 45px; ;
+      }
+      .shadow-area{
+        width: 100%;
+        padding: 10px 0;
+        box-shadow: 0px 5px 20px #d9d9d9;
+       }
+    
+       .all-content{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 25px;
+       }
+       .iconPage{
+        text-align: center;
+       }
+       .iconPage span{
+        color: #007bff;
+        font-size: 10px;
+        text-align: center;
+      
+       }
+       .shadow-area .background-img img{
+        border-radius: 10px;
+        padding: 5px;
+       }
+
+  }
+  
+  

@@ -1,0 +1,148 @@
+
+
+  
+
+  
+  /* .container {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+  } */
+  
+  
+ @media only screen and (max-width: 768px) { 
+
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+   
+   
+  }
+  .body2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+      .container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .labletag{
+        display: block;
+        text-align: left;
+    }
+    .signuph1 {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .loginInput {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 15px;
+      }
+      
+      .loginButton {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      
+      .loginButton:hover {
+        background-color: #3e8e41;
+      }
+      .label{
+        margin-top: 8px;
+        color: black;
+       }
+       .manualError{
+        text-align: left;
+        color: red;
+        width: 200px !important;
+        margin: 3px;
+      }
+      
+  }
+    
+  /* laptop */
+   
+  @media only screen and (min-width: 769px) {
+    body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+       
+       
+      }
+      .body2{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f0f0f0;
+       text-align: left;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .labletag{
+        display: block;
+        text-align: left;
+    }
+    .signuph1 {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .loginInput {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 15px;
+      }
+      
+      .loginButton {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      
+      .loginButton:hover {
+        background-color: #3e8e41;
+      }
+      .label{
+        margin-top: 10px;
+        color: black;
+       }
+       .manualError{
+        text-align: left;
+        color: red;
+        width: 300px;
+        margin: 3px;
+        display: block;
+      }
+      
+
+  }
+
+ 
