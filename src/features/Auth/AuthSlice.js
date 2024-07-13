@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  createCashout,
+  createDeposit,
+  createSupport,
   forgotPassword,
+  getAllUser,
   loggedInUser,
   logout,
   mailVerification,
@@ -15,6 +19,7 @@ const initialState = {
   user: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : null,
+  users: [],
   isLoading: false,
   isError: null,
   message: null,
@@ -82,8 +87,8 @@ const authSlice = createSlice({
       })
       .addCase(loggedInUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload;
         state.message = null;
+        state.user = action.payload;
         if (action.payload) {
           localStorage.setItem("user", JSON.stringify(action.payload));
         }
@@ -133,6 +138,57 @@ const authSlice = createSlice({
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.message = action.payload.message;
         state.isLoading = false;
+      })
+      //create deposit
+      .addCase(createDeposit.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(createDeposit.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.error.message;
+      })
+      .addCase(createDeposit.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        state.user.deposit.push(action.payload.deposit);
+      }) //create cashout
+      .addCase(createCashout.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(createCashout.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.error.message;
+      })
+      .addCase(createCashout.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        state.user.cashOut.push(action.payload.cashOut);
+      })
+      //create cashout
+      .addCase(createSupport.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(createSupport.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.error.message;
+      })
+      .addCase(createSupport.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        state.user.support.push(action.payload.support);
+      })
+      //get all users
+      .addCase(getAllUser.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.error.message;
+      })
+      .addCase(getAllUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = null;
+        state.users = action.payload.users;
       });
   },
 });

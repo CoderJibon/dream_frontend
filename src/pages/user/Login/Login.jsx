@@ -4,9 +4,9 @@ import { Link, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import SyncLoader from "react-spinners/SyncLoader";
+import toastify from "../../../utils/toastify.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import toastify from "../../../utils/toastify.jsx";
 import { setMessageEmpty } from "../../../features/Auth/AuthSlice.js";
 import {
   mailVerification,

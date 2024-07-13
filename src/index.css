@@ -117,3 +117,57 @@ div#adminhome {
 .profilelogo {
   width: 40%;
 }
+td select {
+  width: 100%;
+  padding: 3px;
+}
+table {
+  background-color: #fff;
+}
+td#success {
+  background-color: green;
+  color: #fff;
+}
+td#pending {
+  background-color: #000;
+  color: #fff;
+}
+td#rejected {
+  background-color: red;
+  color: #fff;
+}
+div#buttonclient {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  margin-right: 20px;
+}
+div#buttonclient {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  margin-right: 20px;
+}
+div#buttonclient button {
+  padding: 10px 20px;
+}
+.actionbtn button {
+  padding: 5px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+.actionbtn {
+  gap: 12px;
+  display: flex;
+}
+button#edit {
+  background-color: coral;
+  border-color: coral;
+  color: #fff;
+  font-size: 20px;
+}
+button#delete {
+  background-color: red;
+  border-color: red;
+}

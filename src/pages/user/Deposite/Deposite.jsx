@@ -1,17 +1,17 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Deposite.css";
+//form handling for
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import SyncLoader from "react-spinners/SyncLoader";
+import toastify from "../../../utils/toastify.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setMessageEmpty } from "../../../features/Auth/AuthSlice.js";
+import { createDeposit } from "../../../features/Auth/AuthApiSlice.js";
 
 const Deposite = () => {
-  const [deposit, setDeposit] = useState({
-    type: "bKash",
-    number: "",
-    amount: null,
-    transaction_id: "",
-  });
-
-  const [css, setCss] = useState({});
-
+  //copy the number
   const copyNumber = (numberToCopy) => {
     navigator.clipboard
       .writeText(numberToCopy)
@@ -22,20 +22,55 @@ const Deposite = () => {
         alert(`Copy failed! ${error}`);
       });
   };
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDeposit((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+  //dispatch via call api
+  const dispatch = useDispatch();
+  const { isError, message, isLoading } = useSelector((state) => state.auth);
+
+  //validation schema
+  const schema = Yup.object().shape({
+    amount: Yup.string().required("amount is required"),
+    transactionID: Yup.string().required("transactionID is required"),
+    phone: Yup.string().required("phone is required"),
+    method: Yup.string().required("method is required"),
+  });
+
+  // from handlers
+  const formik = useFormik({
+    initialValues: {
+      amount: "",
+      transactionID: "",
+      phone: "",
+      method: "",
+    },
+    validationSchema: schema,
+    onSubmit: (value) => {
+      dispatch(createDeposit(value));
+    },
+  });
+
+  useEffect(() => {
+    if (isError) {
+      toastify("error", isError);
+      dispatch(setMessageEmpty());
+    }
+    if (message) {
+      toastify("success", message);
+      formik.resetForm();
+      dispatch(setMessageEmpty());
+    }
+  }, [isError, message]);
 
   return (
     <div className="section">
+      <SyncLoader
+        color={"#4CAF50"}
+        loading={isLoading}
+        cssOverride={{ position: "fixed", top: "50%", left: "50%" }}
+        size={15}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
       <header className="diposits">
         <div className="container">
           <div className="row">
@@ -44,11 +79,11 @@ const Deposite = () => {
                 <Link to="/">
                   <i className="bi bi-chevron-left"></i>
                 </Link>
-                <h2>Diposit</h2>
+                <h2>Deposit</h2>
               </div>
             </div>
 
-            <div class="form mt-5">
+            <div className="form mt-5">
               <div className="card shadow">
                 <div className="card-body">
                   <div className="divshadow">
@@ -131,16 +166,20 @@ const Deposite = () => {
                     </h3>
                   </div>
 
-                  <form id="userFormdeposit" className="form-container">
+                  <form
+                    onSubmit={formik.handleSubmit}
+                    id="userFormdeposit"
+                    className="form-container"
+                  >
                     <div className="input-group mb-3">
                       <label className="getwaylabel">Method</label>
                       <select
-                        onChange={handleChange}
-                        value={deposit.type}
-                        name="type"
                         id="method"
-                        className="form-control seletctGetwaymethord"
+                        className="form-control "
+                        onChange={formik.handleChange("method")}
+                        //value={formik.values.method}
                       >
+                        <option value="">--Select--</option>
                         <option value="Bikash">Bkash</option>
                         <option value="Nagad">Nagad</option>
                         <option value="Rocket">Rocket</option>
@@ -150,45 +189,38 @@ const Deposite = () => {
 
                     <div className="input-group my-5">
                       <input
-                        name="number"
-                        onChange={handleChange}
-                        value={deposit.number}
-                        className="form-control seletctGetwaymethord"
-                        id="amounts"
+                        className="form-control "
                         placeholder="Phone Number"
                         type="number"
+                        name="phone"
+                        onChange={formik.handleChange("phone")}
+                        value={formik.values.phone}
                       />
                     </div>
 
                     <div className="input-group my-5">
                       <input
-                        name="amount"
-                        onChange={handleChange}
-                        value={deposit.amount}
-                        className="form-control seletctGetwaymethord"
-                        id="amounts"
+                        className="form-control "
                         placeholder="Amount"
                         type="number"
+                        name="amount"
+                        onChange={formik.handleChange("amount")}
+                        value={formik.values.amount}
                       />
                     </div>
 
                     <div className="input-group my-5">
                       <input
-                        name="transaction_id"
-                        onChange={handleChange}
-                        className="form-control seletctGetwaymethord"
-                        value={deposit.transaction_id}
-                        id="transactions"
+                        className="form-control "
                         placeholder="Transaction ID"
                         type="text"
+                        name="transactionID"
+                        onChange={formik.handleChange("transactionID")}
+                        value={formik.values.transactionID}
                       />
                     </div>
 
-                    <button
-                      onClick={handleSubmit}
-                      className="submit-btn"
-                      type="submit"
-                    >
+                    <button className="submit-btn" type="submit">
                       Submit
                     </button>
                   </form>

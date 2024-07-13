@@ -18,14 +18,14 @@ const TotalEarn = () => {
   }, []);
 
   return (
-    <div class="body">
-      <header class="diposits">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="diposit-header">
+    <div className="body">
+      <header className="diposits">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="diposit-header">
                 <Link to="/">
-                  <i class="bi bi-chevron-left"></i>
+                  <i className="bi bi-chevron-left"></i>
                 </Link>{" "}
                 <h2>Total Earn</h2>
               </div>
@@ -34,7 +34,7 @@ const TotalEarn = () => {
         </div>
       </header>
 
-      <table class="earntable">
+      <table className="earntable">
         <thead>
           <tr>
             <th>SL NO:</th>

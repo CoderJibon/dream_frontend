@@ -1,47 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Transection.css";
+import { useSelector } from "react-redux";
+import formatToDate from "../../../utils/formatToData.js";
 const Transection = () => {
-  const [deposit, setDeposit] = useState([]);
-  const [cashout, setCashout] = useState([]);
-
-  useEffect(() => {
-    // axios.get("http://localhost:5000/api/deposit/depositHistory", {
-    //     headers: {
-    //         'userid': userId
-    //     }
-    // })
-    //     .then(res => {
-    //         setDeposit(res.data.deposits);
-    //         console.log(res.data);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     });
-    // axios.get("http://localhost:5000/api/cashout/cashoutHistory", {
-    //     headers: {
-    //         'userid': userId
-    //     }
-    // })
-    //     .then(res => {
-    //         setCashout(res.data.cashout);
-    //         console.log(res.data);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     });
-  }, []);
-
+  //dispatch via call api
+  const { user } = useSelector((state) => state.auth);
   return (
-    <div class="body">
-      <header class="diposits">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="diposit-header">
+    <div className="body">
+      <header className="diposits">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="diposit-header">
                 <Link to="/">
-                  <i class="bi bi-chevron-left"></i>
-                </Link>{" "}
+                  <i className="bi bi-chevron-left"></i>
+                </Link>
                 <h2>Transection</h2>
               </div>
             </div>
@@ -53,28 +27,31 @@ const Transection = () => {
         <thead>
           <tr>
             <th>SL</th>
-            <th>Amount</th>
             <th>Method</th>
+            <th>Amount</th>
             <th>Ac.Number</th>
             <th>Note</th>
-            <th>Status</th>
-            <th>DATE</th>
+            <th style={{ minWidth: "150px" }}>Status</th>
+            <th style={{ minWidth: "150px" }}>Date</th>
           </tr>
         </thead>
         <tbody>
-          {/* {
-                    cashout && cashout.map((data, idx) => (
-                        <tr key={idx}>
-                            <td>{idx + 1}</td>
-                            <td>{data.amount}</td>
-                            <td>{data.method}</td>
-                            <td>{data.account_number}</td>
-                            <td>{data.note}</td>
-                            <td>{data.status ? "True" : "False"}</td>
-                            <td>{data.createdAt}</td>
-                        </tr>
-                    ))
-                } */}
+          {user?.cashOut?.length > 0 &&
+            user?.cashOut
+              ?.map((data, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{data?.method}</td>
+                    <td>{data?.amount} BDT</td>
+                    <td>{data?.accountNumber}</td>
+                    <td>{data?.note}</td>
+                    <td id={data?.status}>{data?.status}</td>
+                    <td>{formatToDate(data?.createdAt)}</td>
+                  </tr>
+                );
+              })
+              ?.reverse()}
         </tbody>
       </table>
       <h3 className="title mt-3">All deposit transaction here.</h3>
@@ -83,28 +60,31 @@ const Transection = () => {
           <thead>
             <tr>
               <th>SL</th>
-              <th>Amount</th>
-              <th>Method</th>
+              <th>method</th>
+              <th>amount</th>
               <th>Ac.Number</th>
               <th>TRX</th>
-              <th>Status</th>
-              <th>DATE</th>
+              <th style={{ minWidth: "150px" }}>Status</th>
+              <th style={{ minWidth: "150px" }}>Date</th>
             </tr>
           </thead>
           <tbody>
-            {/* {
-                        deposit && deposit.map((data, idx) => (
-                            <tr key={idx}>
-                                <td>{idx + 1}</td>
-                                <td>{data.amount}</td>
-                                <td>{data.type}</td>
-                                <td>{data.number}</td>
-                                <td>{data.transaction_id}</td>
-                                <td>{data.status ? "True" : "False"}</td>
-                                <td>{data.createdAt}</td>
-                            </tr>
-                        ))
-                    } */}
+            {user?.deposit?.length > 0 &&
+              user?.deposit
+                ?.map((data, index) => {
+                  return (
+                    <tr key={data._id}>
+                      <td>{index + 1}</td>
+                      <td>{data?.method}</td>
+                      <td>{data?.amount} BDT</td>
+                      <td>{data?.phone}</td>
+                      <td>{data?.transactionID}</td>
+                      <td id={data?.status}>{data?.status}</td>
+                      <td>{formatToDate(data?.createdAt)}</td>
+                    </tr>
+                  );
+                })
+                ?.reverse()}
           </tbody>
         </table>
       </div>

@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 const Commision = () => {
   return (
     <div>
-      <div class="body">
-        <header class="diposits">
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <div class="diposit-header">
+      <div className="body">
+        <header className="diposits">
+          <div className="container">
+            <div className="row">
+              <div className="col-12">
+                <div className="diposit-header">
                   <Link to="/">
-                    <i class="bi bi-chevron-left"></i>
+                    <i className="bi bi-chevron-left"></i>
                   </Link>{" "}
                   <h2>Commision</h2>
                 </div>
@@ -20,7 +20,7 @@ const Commision = () => {
           </div>
         </header>
 
-        <table class="commisiontable">
+        <table className="commisiontable">
           <thead>
             <tr>
               <th>SL NO:</th>

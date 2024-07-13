@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import "./DHistory.css";
 import { Link } from "react-router-dom";
+import formatToDate from "../../../utils/formatToData.js";
 
 const DHistory = () => {
-  const [deposit, setDeposit] = useState([]);
-
-  useEffect(() => {
-    // axios.get("http://localhost:5000/api/deposit/depositHistory", {
-    //     headers: {
-    //         'userid': userId
-    //     }
-    // })
-    //     .then(res => {
-    //         setDeposit(res.data.deposits);
-    //         console.log(res.data);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     });
-  }, []);
+  //dispatch via call api
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <div>
@@ -43,24 +30,31 @@ const DHistory = () => {
             <thead>
               <tr>
                 <th>SL</th>
-                <th>Amount</th>
-                <th>Method</th>
+                <th>method</th>
+                <th>amount</th>
                 <th>Ac.Number</th>
                 <th>TRX</th>
-                <th>Status</th>
-                <th>DATE</th>
+                <th style={{ minWidth: "150px" }}>Status</th>
+                <th style={{ minWidth: "150px" }}>Date</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>SL</td>
-                <td>Amount</td>
-                <td>Method</td>
-                <td>Ac.Number</td>
-                <td>TRX</td>
-                <td>Status</td>
-                <td>DATE</td>
-              </tr>
+              {user?.deposit?.length > 0 &&
+                user?.deposit
+                  ?.map((data, index) => {
+                    return (
+                      <tr key={data._id}>
+                        <td>{index + 1}</td>
+                        <td>{data?.method}</td>
+                        <td>{data?.amount} BDT</td>
+                        <td>{data?.phone}</td>
+                        <td>{data?.transactionID}</td>
+                        <td id={data?.status}>{data?.status}</td>
+                        <td>{formatToDate(data?.createdAt)}</td>
+                      </tr>
+                    );
+                  })
+                  ?.reverse()}
             </tbody>
           </table>
         </div>

@@ -1,48 +1,74 @@
-import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Complaint.css";
+import { useDispatch, useSelector } from "react-redux";
+//form handling for
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import SyncLoader from "react-spinners/SyncLoader";
+import toastify from "../../../utils/toastify.jsx";
+import { useEffect } from "react";
+import { setMessageEmpty } from "../../../features/Auth/AuthSlice.js";
+import { createSupport } from "../../../features/Auth/AuthApiSlice.js";
 
 const Complaint = () => {
-  const userId = localStorage.getItem("userId");
-  const [complain, setComplain] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    priority: "High",
-    message: "",
+  //dispatch via call api
+  const dispatch = useDispatch();
+  const { isError, message, user, isLoading } = useSelector(
+    (state) => state.auth
+  );
+
+  //validation schema
+  const schema = Yup.object().shape({
+    subject: Yup.string().required("subject is required"),
+    Priority: Yup.string().required("Priority is required"),
+    Message: Yup.string().required("Message is required"),
+  });
+  // from handlers
+  const formik = useFormik({
+    initialValues: {
+      name: user?.name,
+      email: user?.email,
+      subject: "",
+      Priority: "",
+      Message: "",
+    },
+    validationSchema: schema,
+    onSubmit: (value) => {
+      console.log(value);
+      dispatch(createSupport(value));
+    },
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setComplain((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // axios.post("http://localhost:5000/api/complain/addComplain", complain, {
-    //     headers: {
-    //         "userid": userId
-    //     }
-    // }).then((res) => {
-    //     alert("Your complaint has been received.");
-    // }).catch((err) => {
-    //     alert("Please try again later.");
-    // });
-  };
+  useEffect(() => {
+    if (isError) {
+      toastify("error", isError);
+      dispatch(setMessageEmpty());
+    }
+    if (message) {
+      toastify("success", message);
+      formik.resetForm();
+      dispatch(setMessageEmpty());
+    }
+  }, [isError, message]);
 
   return (
     <div className="section">
-      <header class="diposits">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="diposit-header">
+      <SyncLoader
+        color={"#4CAF50"}
+        loading={isLoading}
+        cssOverride={{ position: "fixed", top: "50%", left: "50%" }}
+        size={15}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+      <header className="diposits">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="diposit-header">
                 <Link to="/support">
-                  <i class="bi bi-chevron-left"></i>
-                </Link>{" "}
+                  <i className="bi bi-chevron-left"></i>
+                </Link>
                 <h2>Complaint</h2>
               </div>
             </div>
@@ -51,34 +77,25 @@ const Complaint = () => {
       </header>
 
       <div className="conplaintfrom">
-        <form>
+        <form onSubmit={formik.handleSubmit}>
           <div className="complaintdiv1">
             <label>
-              {" "}
               <span>Name</span>
               <input
-                required
-                onChange={handleChange}
-                defaultValue={""}
+                value={user.name}
+                disabled
                 className="complaininput"
                 type="text"
-                name="name"
-                value={complain.name}
-                id=""
               />
             </label>
 
             <label>
               <span>Email</span>
               <input
-                required
+                value={user.email}
+                disabled
                 className="complaininput"
-                defaultValue={""}
                 type="email"
-                onChange={handleChange}
-                value={complain.email}
-                name="email"
-                id=""
               />
             </label>
           </div>
@@ -89,23 +106,21 @@ const Complaint = () => {
                 required
                 className="complaininput"
                 type="text"
-                onChange={handleChange}
-                value={complain.subject}
                 name="subject"
-                id=""
+                onChange={formik.handleChange("subject")}
+                value={formik.values.subject}
               />
             </label>
 
             <label>
-              {" "}
               <span>Priority</span>
               <select
-                onChange={handleChange}
-                value={complain.priority}
-                name="priority"
+                onChange={formik.handleChange("Priority")}
+                name="Priority"
                 id="method"
                 className="complaininput"
               >
+                <option value="">--select--</option>
                 <option value="High">High</option>
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
@@ -116,30 +131,15 @@ const Complaint = () => {
             <span className="complanspan">Massage</span>
             <textarea
               required
+              onChange={formik.handleChange("Message")}
+              value={formik.values.Message}
               className="complaintarea"
-              onChange={handleChange}
-              value={complain.message}
-              name="message"
-              id=""
+              name="Message"
             ></textarea>
-          </label>
-          <label>
-            <span className="complanspan">Attachments</span>
-            <input
-              style={{ height: "auto", paddingLeft: 0 }}
-              required
-              className="complaininput"
-              type="file"
-              onChange={handleChange}
-              value={complain.subject}
-              name="attachments"
-              id=""
-            />
           </label>
           <button
             style={{ marginTop: 10 }}
             type="submit"
-            onClick={handleSubmit}
             className="complainbutton"
           >
             Submit

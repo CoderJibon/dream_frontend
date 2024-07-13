@@ -2,17 +2,22 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import "./Support.css";
+import { useSelector } from "react-redux";
+import formatToDate from "../../../utils/formatToData.js";
 const Support = () => {
+  //dispatch via call api
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <div className="section">
-      <header class="diposits">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="diposit-header">
+      <header className="diposits">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="diposit-header">
                 <Link to="/">
-                  <i class="bi bi-chevron-left"></i>
-                </Link>{" "}
+                  <i className="bi bi-chevron-left"></i>
+                </Link>
                 <h2>Support</h2>
               </div>
             </div>
@@ -28,25 +33,47 @@ const Support = () => {
         </Link>
       </div>
       <div>
-        <div class="container">
-          <div class="row justify-content-center mt-4">
-            <div class="col-md-12">
-              <div class="card" id="cardstyle">
-                <div class="card-body p-0">
-                  <div class="table-responsive--sm">
-                    <table class="table">
-                      <thead class="thead" style={{ backGround: "crimson" }}>
+        <div className="container">
+          <div className="row justify-content-center mt-4">
+            <div className="col-md-12">
+              <div className="card" id="cardstyle">
+                <div className="card-body p-0">
+                  <div className="table-responsive--sm">
+                    <table className="table">
+                      <thead
+                        className="thead"
+                        style={{ backGround: "crimson" }}
+                      >
                         <tr>
                           <th style={{ color: "#fff" }}>SL</th>
+                          <th style={{ color: "#fff" }}>Name</th>
+                          <th style={{ color: "#fff" }}>Email</th>
                           <th style={{ color: "#fff" }}>Subject</th>
                           <th style={{ color: "#fff" }}>Message</th>
-                          <th style={{ color: "#fff" }}>Status</th>
+                          <th style={{ color: "#fff" }}>Priority</th>
+                          <th style={{ minWidth: "150px" }}>Status</th>
+                          <th style={{ minWidth: "150px" }}>Date</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="text-center">
-                          <td colspan="100%">No Data Found!</td>
-                        </tr>
+                        {user?.support?.length > 0 &&
+                          user?.support
+                            ?.map((data, index) => {
+                              console.log(data);
+                              return (
+                                <tr key={index}>
+                                  <td>{index + 1}</td>
+                                  <td>{data?.name}</td>
+                                  <td>{data?.email}</td>
+                                  <td>{data?.subject}</td>
+                                  <td>{data?.Message}</td>
+                                  <td>{data?.Priority}</td>
+                                  <td id={data?.status}>{data?.status}</td>
+                                  <td>{formatToDate(data?.createdAt)}</td>
+                                </tr>
+                              );
+                            })
+                            ?.reverse()}
                       </tbody>
                     </table>
                   </div>

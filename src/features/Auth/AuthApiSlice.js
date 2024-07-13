@@ -140,39 +140,12 @@ export const resetPassword = createAsyncThunk(
   }
 );
 
-// get All Orders
-// export const getAllOrder = createAsyncThunk("order/getAllOrder", async () => {
-//     try {
-//       const response = await axios.get(`${baseUrl}/user/get-all-orders`, {
-//         withCredentials: true,
-//       });
-//       return response.data;
-//     } catch (error) {
-//       throw new Error(error.response.data.message);
-//     }
-//   });
-
-// delete order
-//   export const DeleteOrder = createAsyncThunk("order/DeleteOrder", async (id) => {
-//     try {
-//       const response = await axios.delete(
-//         `${baseUrl}/user/get-all-orders/order/${id}`,
-//         {
-//           withCredentials: true,
-//         }
-//       );
-//       return response.data;
-//     } catch (error) {
-//       throw new Error(error.response.data.message);
-//     }
-//   });
-
-//profileUpdate
-export const ProfileUpdate = createAsyncThunk(
-  "auth/ProfileUpdate",
-  async ({ id, formData }) => {
+// create deposit
+export const createDeposit = createAsyncThunk(
+  "auth/createDeposit",
+  async (data) => {
     try {
-      const response = await axios.put(`${baseUrl}/user/${id}`, formData, {
+      const response = await axios.post(`${baseUrl}/deposit`, data, {
         withCredentials: true,
       });
       return response.data;
@@ -182,35 +155,59 @@ export const ProfileUpdate = createAsyncThunk(
   }
 );
 
-// add products wishlist
-export const addWIshList = createAsyncThunk("user/addWIshList", async (id) => {
-  try {
-    const response = await axios.put(
-      `${baseUrl}/user/wishlist`,
-      {
-        productId: id,
-      },
-      {
+// create cashout
+export const createCashout = createAsyncThunk(
+  "auth/createCashout",
+  async (data) => {
+    try {
+      const response = await axios.post(`${baseUrl}/cashOut`, data, {
         withCredentials: true,
-      }
-    );
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);
+
+// create Support
+export const createSupport = createAsyncThunk(
+  "auth/createSupport",
+  async (data) => {
+    try {
+      const response = await axios.post(`${baseUrl}/support`, data, {
+        withCredentials: true,
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);
+
+// get All user
+export const getAllUser = createAsyncThunk("auth/getAllUser", async () => {
+  try {
+    const response = await axios.get(`${baseUrl}/user/all`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
   }
 });
 
-// get all wishlist
-export const getAllWishlist = createAsyncThunk(
-  "user/getAllWishlist",
-  async () => {
-    try {
-      const response = await axios.get(`${baseUrl}/user/wishlist`, {
-        withCredentials: true,
-      });
-      return response.data;
-    } catch (error) {
-      throw new Error(error.response.data.message);
-    }
-  }
-);
+//profileUpdate
+// export const ProfileUpdate = createAsyncThunk(
+//   "auth/ProfileUpdate",
+//   async ({ id, formData }) => {
+//     try {
+//       const response = await axios.put(`${baseUrl}/user/${id}`, formData, {
+//         withCredentials: true,
+//       });
+//       return response.data;
+//     } catch (error) {
+//       throw new Error(error.response.data.message);
+//     }
+//   }
+// );
