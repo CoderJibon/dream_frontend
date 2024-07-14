@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  buyPlan,
   createCashout,
   createDeposit,
   createSupport,
@@ -10,6 +11,7 @@ import {
   mailVerification,
   resetEmailMail,
   resetPassword,
+  userEarning,
   userLogin,
   userRegistration,
 } from "./AuthApiSlice.js";
@@ -189,6 +191,32 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.message = null;
         state.users = action.payload.users;
+      }) //buy plan
+      .addCase(buyPlan.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(buyPlan.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.error.message;
+      })
+      .addCase(buyPlan.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        state.user = action.payload.plan;
+      })
+      //userEarning
+      .addCase(userEarning.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(userEarning.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.error.message;
+      })
+      .addCase(userEarning.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        state.user.myBalance += action.payload.earn;
+        state.user.totalEarning = action.payload.totalEarning;
       });
   },
 });

@@ -4,18 +4,24 @@ import { Link } from "react-router-dom";
 import { getAllPlan } from "../../../features/Plan/PlanApiSlice.js";
 import { useEffect } from "react";
 import toastify from "../../../utils/toastify.jsx";
-import { setMessageEmpty } from "../../../features/Plan/PlanSlice.js";
 import SyncLoader from "react-spinners/SyncLoader.js";
+import { buyPlan } from "../../../features/Auth/AuthApiSlice.js";
+import { setMessageEmpty } from "../../../features/Auth/AuthSlice.js";
 const Plan = () => {
   //dispatch via call api
   const dispatch = useDispatch();
-  const { isError, message, isLoading, plan } = useSelector(
-    (state) => state.plan
-  );
+  const { plan } = useSelector((state) => state.plan);
+  const { isError, message, isLoading } = useSelector((state) => state.auth);
+
   //get all plan
   useEffect(() => {
     dispatch(getAllPlan());
   }, [dispatch]);
+
+  //buy plan
+  const handleBuyPlan = ({ id }) => {
+    dispatch(buyPlan({ plan: id }));
+  };
 
   // message loading
   useEffect(() => {
@@ -70,7 +76,12 @@ const Plan = () => {
                 </div>
               </div>
               <div className="card-footer ">
-                <button value="submit" className="planButton" type="submit">
+                <button
+                  onClick={() => handleBuyPlan({ id: plan._id })}
+                  value="submit"
+                  className="planButton"
+                  type="submit"
+                >
                   BUY NOW
                 </button>
               </div>

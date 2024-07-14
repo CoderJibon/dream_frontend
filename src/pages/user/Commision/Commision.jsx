@@ -1,7 +1,10 @@
 import React from "react";
 import "./Commision.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Commision = () => {
+  //dispatch via call api
+  const { user } = useSelector((state) => state.auth);
   return (
     <div>
       <div className="body">
@@ -24,24 +27,25 @@ const Commision = () => {
           <thead>
             <tr>
               <th>SL NO:</th>
-              <th>TRX</th>
-              <th>BONUS FROM</th>
-              <th>AMOUNT</th>
-              <th>FINAL BALANCE</th>
-              <th>REMARKS</th>
-              <th>DATE</th>
+              <th>New User</th>
+              <th>Commission</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Apple</td>
-              <td>Red</td>
-              <td>$1.00</td>
-              <td>Apple</td>
-              <td>Red</td>
-              <td>$1.00</td>
-              <td>$1.00</td>
-            </tr>
+            {user?.commission?.length > 0 &&
+              user?.commission
+                ?.map((data, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{data?.newUser}</td>
+                      <td>{data?.commission} BDT</td>
+                      <td id={data?.status}>{data?.status}</td>
+                    </tr>
+                  );
+                })
+                ?.reverse()}
           </tbody>
         </table>
       </div>

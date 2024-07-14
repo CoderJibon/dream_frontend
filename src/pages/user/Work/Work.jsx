@@ -4,20 +4,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllWork } from "../../../features/Work/WorkApiSlice.js";
 import { useEffect } from "react";
 import toastify from "../../../utils/toastify.jsx";
-import { setMessageEmpty } from "../../../features/Plan/PlanSlice.js";
 import SyncLoader from "react-spinners/SyncLoader.js";
+import { userEarning } from "../../../features/Auth/AuthApiSlice.js";
+import { setMessageEmpty } from "../../../features/Auth/AuthSlice.js";
 
 const Work = () => {
   //dispatch via call api
   const dispatch = useDispatch();
-  const { isError, message, isLoading, work } = useSelector(
-    (state) => state.work
-  );
+  const { work } = useSelector((state) => state.work);
+  const { isError, message, isLoading } = useSelector((state) => state.auth);
 
   //get all work
   useEffect(() => {
     dispatch(getAllWork());
   }, [dispatch]);
+
+  //get user Earning
+  const handleEarnBtn = ({ name }) => {
+    dispatch(userEarning({ name: name }));
+  };
 
   // message loading
   useEffect(() => {
@@ -68,7 +73,12 @@ const Work = () => {
                   <p>{work?.name}</p>
                 </div>
                 <div className="wflexcol2">
-                  <button className="clickbtn">Click Ad</button>
+                  <button
+                    onClick={() => handleEarnBtn({ name: work?.name })}
+                    className="clickbtn"
+                  >
+                    Click Ad
+                  </button>
                 </div>
               </div>
             </div>

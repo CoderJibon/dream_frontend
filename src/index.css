@@ -171,3 +171,7 @@ button#delete {
   background-color: red;
   border-color: red;
 }
+select {
+  width: 100%;
+  padding: 5px;
+}

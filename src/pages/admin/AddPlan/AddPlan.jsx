@@ -62,6 +62,7 @@ function AddPlan() {
     }
     if (message) {
       toastify("success", message);
+      formik.resetForm();
       dispatch(setMessageEmpty());
     }
   }, [isError, message]);

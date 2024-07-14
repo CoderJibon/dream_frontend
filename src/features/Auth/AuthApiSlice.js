@@ -197,6 +197,33 @@ export const getAllUser = createAsyncThunk("auth/getAllUser", async () => {
   }
 });
 
+// Buy Plan
+export const buyPlan = createAsyncThunk("auth/buyPlan", async (data) => {
+  try {
+    const response = await axios.post(`${baseUrl}/user/buyPlan`, data, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+});
+
+// user Earning
+export const userEarning = createAsyncThunk(
+  "auth/userEarning",
+  async (data) => {
+    try {
+      const response = await axios.post(`${baseUrl}/user/userEarning`, data, {
+        withCredentials: true,
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);
+
 //profileUpdate
 // export const ProfileUpdate = createAsyncThunk(
 //   "auth/ProfileUpdate",
