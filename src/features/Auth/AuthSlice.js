@@ -192,7 +192,6 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.message = null;
         state.users = action.payload.users;
-<<<<<<< HEAD
       })
       // update profile
       .addCase(ProfileUpdate.pending, (state) => {
@@ -211,7 +210,6 @@ const authSlice = createSlice({
         if (action.payload.user) {
           localStorage.setItem("user", JSON.stringify(action.payload.user));
         }
-=======
       }) //buy plan
       .addCase(buyPlan.pending, (state, action) => {
         state.isLoading = true;
@@ -238,7 +236,6 @@ const authSlice = createSlice({
         state.message = action.payload.message;
         state.user.myBalance += action.payload.earn;
         state.user.totalEarning = action.payload.totalEarning;
->>>>>>> 5b53d7b58ea99b385aaf95d1e3ad33d2a514232b
       });
   },
 });
