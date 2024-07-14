@@ -8,11 +8,17 @@ import { Modal } from "react-responsive-modal";
 import toastify from "../../../utils/toastify.jsx";
 import SyncLoader from "react-spinners/SyncLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { createPlan, getAllPlan } from "../../../features/Plan/PlanApiSlice.js";
+import {
+  createPlan,
+  deleteAPlan,
+  getAllPlan,
+} from "../../../features/Plan/PlanApiSlice.js";
 import { setMessageEmpty } from "../../../features/Plan/PlanSlice.js";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
+
 function AddPlan() {
   //modal
   const [open, setOpen] = useState(false);
@@ -49,10 +55,31 @@ function AddPlan() {
     },
     validationSchema: schema,
     onSubmit: (value) => {
-      console.log(value);
       dispatch(createPlan(value));
     },
   });
+
+  // delete a plan
+  const handleDeletePlan = (id) => {
+    if (id) {
+      swal({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          dispatch(deleteAPlan(id));
+          // swal("Proof! Your Imaginary File Has Been Deleted", {
+          //   icon: "success",
+          // });
+        } else {
+          swal("Your Imaginary File Is Safe!");
+        }
+      });
+    }
+  };
 
   // message loading
   useEffect(() => {
@@ -199,7 +226,10 @@ function AddPlan() {
                             <BiEditAlt />
                           </button>
                         </Link>
-                        <button id="delete">
+                        <button
+                          id="delete"
+                          onClick={() => handleDeletePlan(data?._id)}
+                        >
                           <MdDelete />
                         </button>
                       </div>

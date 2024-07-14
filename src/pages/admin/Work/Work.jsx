@@ -9,9 +9,14 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { createWork, getAllWork } from "../../../features/Work/WorkApiSlice.js";
+import {
+  createWork,
+  deleteAWork,
+  getAllWork,
+} from "../../../features/Work/WorkApiSlice.js";
 import { setMessageEmpty } from "../../../features/Plan/PlanSlice.js";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 const Work = () => {
   //modal
   const [open, setOpen] = useState(false);
@@ -38,10 +43,31 @@ const Work = () => {
     },
     validationSchema: schema,
     onSubmit: (value) => {
-      console.log(value);
       dispatch(createWork(value));
     },
   });
+
+  // delete a work
+  const handleDeleteWork = (id) => {
+    if (id) {
+      swal({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          dispatch(deleteAWork(id));
+          // swal("Proof! Your Imaginary File Has Been Deleted", {
+          //   icon: "success",
+          // });
+        } else {
+          swal("Your Imaginary File Is Safe!");
+        }
+      });
+    }
+  };
 
   // message loading
   useEffect(() => {
@@ -120,7 +146,10 @@ const Work = () => {
                             <BiEditAlt />
                           </button>
                         </Link>
-                        <button id="delete">
+                        <button
+                          id="delete"
+                          onClick={() => handleDeleteWork(data?._id)}
+                        >
                           <MdDelete />
                         </button>
                       </div>

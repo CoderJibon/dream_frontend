@@ -8,6 +8,7 @@ import {
   loggedInUser,
   logout,
   mailVerification,
+  ProfileUpdate,
   resetEmailMail,
   resetPassword,
   userLogin,
@@ -189,6 +190,24 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.message = null;
         state.users = action.payload.users;
+      })
+      // update profile
+      .addCase(ProfileUpdate.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(ProfileUpdate.rejected, (state, action) => {
+        state.isError = action.error.message;
+        state.message = null;
+        state.isLoading = false;
+      })
+      .addCase(ProfileUpdate.fulfilled, (state, action) => {
+        state.isError = null;
+        state.message = action.payload.message;
+        state.isLoading = false;
+        state.user = action.payload.user;
+        if (action.payload.user) {
+          localStorage.setItem("user", JSON.stringify(action.payload.user));
+        }
       });
   },
 });

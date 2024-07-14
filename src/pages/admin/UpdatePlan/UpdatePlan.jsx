@@ -8,14 +8,20 @@ import toastify from "../../../utils/toastify.jsx";
 import SyncLoader from "react-spinners/SyncLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessageEmpty } from "../../../features/Plan/PlanSlice.js";
-import { useParams } from "react-router-dom";
-import { getASinglePlan } from "../../../features/Plan/PlanApiSlice.js";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  getASinglePlan,
+  updateAPlan,
+} from "../../../features/Plan/PlanApiSlice.js";
 function UpdatePlan() {
   //get id
   const { id } = useParams();
 
   //dispatch via call api
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
   const { isError, message, isLoading, singlePlan } = useSelector(
     (state) => state.plan
   );
@@ -47,8 +53,7 @@ function UpdatePlan() {
     },
     validationSchema: schema,
     onSubmit: (value) => {
-      console.log(value);
-      dispatch(createPlan(value));
+      dispatch(updateAPlan({ id, value }));
     },
   });
 
@@ -67,6 +72,7 @@ function UpdatePlan() {
       });
     }
   }, [singlePlan, formik.setValues]);
+  
 
   // get single plan
   useEffect(() => {
@@ -82,6 +88,9 @@ function UpdatePlan() {
     if (message) {
       toastify("success", message);
       dispatch(setMessageEmpty());
+      if (message == "Plan updated successfully") {
+        navigate("/admin/plan");
+      }
     }
   }, [isError, message]);
 

@@ -198,16 +198,17 @@ export const getAllUser = createAsyncThunk("auth/getAllUser", async () => {
 });
 
 //profileUpdate
-// export const ProfileUpdate = createAsyncThunk(
-//   "auth/ProfileUpdate",
-//   async ({ id, formData }) => {
-//     try {
-//       const response = await axios.put(`${baseUrl}/user/${id}`, formData, {
-//         withCredentials: true,
-//       });
-//       return response.data;
-//     } catch (error) {
-//       throw new Error(error.response.data.message);
-//     }
-//   }
-// );
+
+export const ProfileUpdate = createAsyncThunk(
+  "auth/ProfileUpdate",
+  async ({ id, formData }) => {
+    try {
+      const response = await axios.put(`${baseUrl}/user/${id}`, formData, {
+        withCredentials: true,
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);

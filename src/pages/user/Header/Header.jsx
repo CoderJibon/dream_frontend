@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { rootUrl } from "../../../utils/baseUrl.js";
 
 const Header = () => {
   //get user
@@ -40,7 +41,10 @@ const Header = () => {
             <div className="header-info">
               <div className="thumbnils-img">
                 {user && user?.photo ? (
-                  <img src={user?.photo} alt="" />
+                  <img
+                    src={`${rootUrl}/UsersPhoto/${user?.photo}`}
+                    alt=""
+                  />
                 ) : (
                   <img
                     src="https://cdn-icons-png.flaticon.com/512/147/147140.png"

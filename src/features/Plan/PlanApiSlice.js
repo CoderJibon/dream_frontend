@@ -33,7 +33,7 @@ export const updateAPlan = createAsyncThunk(
     try {
       const response = await axios.put(
         `${baseUrl}/plan/${data.id}`,
-        data.values,
+        data.value,
         {
           withCredentials: true,
         }
@@ -52,7 +52,27 @@ export const getASinglePlan = createAsyncThunk(
   async (id) => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/v1/plan/${id}`,
+        `${baseUrl}/plan/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);
+
+// delete a plan
+
+export const deleteAPlan = createAsyncThunk(
+  "plan/deleteAPlan",
+  async (id) => {
+    try {
+      const response = await axios.delete(
+        `${baseUrl}/plan/${id}`,
         {
           withCredentials: true,
         }

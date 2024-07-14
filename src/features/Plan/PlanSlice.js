@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   createPlan,
+  deleteAPlan,
   getAllPlan,
   getASinglePlan,
   updateAPlan,
@@ -78,6 +79,14 @@ const planSlice = createSlice({
         if (updatedPlanIndex !== -1) {
           state.plan[updatedPlanIndex] = action.payload.plan;
         }
+
+        state.message = action.payload.message;
+      })
+      // delete a plan
+      .addCase(deleteAPlan.fulfilled, (state, action) => {
+        state.plan = state.plan.filter(
+          (data) => data._id !== action.payload.plan._id
+        );
 
         state.message = action.payload.message;
       });

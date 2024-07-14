@@ -7,21 +7,23 @@ import toastify from "../../../utils/toastify.jsx";
 import SyncLoader from "react-spinners/SyncLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessageEmpty } from "../../../features/Plan/PlanSlice.js";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  getASingleWork,
+  updateAWork,
+} from "../../../features/Work/WorkApiSlice.js";
 const UpdateWork = () => {
   //get id
   const { id } = useParams();
 
   //dispatch via call api
   const dispatch = useDispatch();
-  const { isError, message, isLoading, work } = useSelector(
+
+  const navigate = useNavigate();
+
+  const { isError, message, isLoading, singleWork } = useSelector(
     (state) => state.work
   );
-
-  //get all work
-  useEffect(() => {
-    //dispatch(getAllWork());
-  }, [dispatch]);
 
   //validation schema
   const schema = Yup.object().shape({
@@ -35,10 +37,25 @@ const UpdateWork = () => {
     },
     validationSchema: schema,
     onSubmit: (value) => {
-      console.log(value);
-      //dispatch(createWork(value));
+      dispatch(updateAWork({ id, value }));
     },
   });
+
+  // set previous values
+
+  useEffect(() => {
+    if (singleWork) {
+      formik.setValues({
+        ...formik.values,
+        name: singleWork?.name || "",
+      });
+    }
+  }, [singleWork, formik.setValues]);
+
+  // get single work
+  useEffect(() => {
+    dispatch(getASingleWork(id));
+  }, [dispatch, id]);
 
   // message loading
   useEffect(() => {
@@ -49,6 +66,9 @@ const UpdateWork = () => {
     if (message) {
       toastify("success", message);
       dispatch(setMessageEmpty());
+      if (message == "Work updated successfully") {
+        navigate("/admin/work");
+      }
     }
   }, [isError, message]);
   return (
@@ -62,7 +82,7 @@ const UpdateWork = () => {
         data-testid="loader"
       />
       <div className="">
-        <TopHeader name="Update Advertisement"></TopHeader>
+        <TopHeader name="Update Advertisement" link="/admin/work"></TopHeader>
       </div>
       <div className="mb-5 mt-4 adminLogin">
         <h4 className="title">Update Advertisement</h4>

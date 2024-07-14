@@ -115,7 +115,7 @@ div#adminhome {
   margin-top: 40px;
 }
 .profilelogo {
-  width: 40%;
+  width: 25%;
 }
 td select {
   width: 100%;
@@ -170,4 +170,11 @@ button#edit {
 button#delete {
   background-color: red;
   border-color: red;
+}
+
+.thumbnils-img img {
+  width: 50px;
+  border-radius: 50px;
+  height: 50px;
+  object-fit: cover;
 }
