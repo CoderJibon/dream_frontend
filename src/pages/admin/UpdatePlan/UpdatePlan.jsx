@@ -9,13 +9,14 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessageEmpty } from "../../../features/Plan/PlanSlice.js";
 import { useParams } from "react-router-dom";
+import { getASinglePlan } from "../../../features/Plan/PlanApiSlice.js";
 function UpdatePlan() {
   //get id
   const { id } = useParams();
 
   //dispatch via call api
   const dispatch = useDispatch();
-  const { isError, message, isLoading, plan } = useSelector(
+  const { isError, message, isLoading, singlePlan } = useSelector(
     (state) => state.plan
   );
 
@@ -47,9 +48,30 @@ function UpdatePlan() {
     validationSchema: schema,
     onSubmit: (value) => {
       console.log(value);
-      //dispatch(createPlan(value));
+      dispatch(createPlan(value));
     },
   });
+
+  // set previous values
+
+  useEffect(() => {
+    if (singlePlan) {
+      formik.setValues({
+        ...formik.values,
+        name: singlePlan?.name || "",
+        price: singlePlan?.price || "",
+        dailyAdvertisement: singlePlan?.dailyAdvertisement || "",
+        dailyIncome: singlePlan?.dailyIncome || "",
+        parAdsPrice: singlePlan?.parAdsPrice || "",
+        validity: singlePlan?.validity || "",
+      });
+    }
+  }, [singlePlan, formik.setValues]);
+
+  // get single plan
+  useEffect(() => {
+    dispatch(getASinglePlan(id));
+  }, [dispatch, id]);
 
   // message loading
   useEffect(() => {
@@ -73,7 +95,7 @@ function UpdatePlan() {
         aria-label="Loading Spinner"
         data-testid="loader"
       />
-      <TopHeader name="Update Plan"></TopHeader>
+      <TopHeader name="Update Plan" link="/admin/plan"></TopHeader>
 
       <div className="mb-5 mt-4 adminLogin">
         <h4 className="title">Update plan</h4>

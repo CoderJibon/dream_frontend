@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const TopHeader = ({ name = "" }) => {
+const TopHeader = ({ name = "", link = "/admin" }) => {
   return (
     <>
       <header style={{ margin: "20px" }} className="diposits">
@@ -9,7 +9,7 @@ const TopHeader = ({ name = "" }) => {
           <div className="row">
             <div className="col-12">
               <div className="diposit-header">
-                <Link to="/admin">
+                <Link to={link}>
                   <i className="bi bi-chevron-left"></i>
                 </Link>
                 <h2>{name}</h2>

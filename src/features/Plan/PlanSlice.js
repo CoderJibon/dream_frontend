@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createPlan, getAllPlan } from "./PlanApiSlice.js";
+import {
+  createPlan,
+  getAllPlan,
+  getASinglePlan,
+  updateAPlan,
+} from "./PlanApiSlice.js";
 
 // create a initialState
 const initialState = {
@@ -7,6 +12,7 @@ const initialState = {
   isLoading: false,
   isError: null,
   message: null,
+  singlePlan: null,
 };
 
 //create slice
@@ -46,6 +52,34 @@ const planSlice = createSlice({
         state.isLoading = false;
         state.message = null;
         state.plan = action.payload.plans;
+      })
+      // get single plan
+      .addCase(getASinglePlan.pending, (state) => {
+        state.isLoading = true;
+        state.singlePlan = null;
+      })
+      .addCase(getASinglePlan.rejected, (state, action) => {
+        state.isError = action.error.message;
+        state.isLoading = false;
+        state.singlePlan = null;
+      })
+      .addCase(getASinglePlan.fulfilled, (state, action) => {
+        state.singlePlan = action.payload;
+        state.isLoading = false;
+      })
+      // update a plan
+      .addCase(updateAPlan.fulfilled, (state, action) => {
+        state.loader = false;
+
+        const updatedPlanIndex = state.plan.findIndex(
+          (item) => item._id === action.payload.plan?._id
+        );
+
+        if (updatedPlanIndex !== -1) {
+          state.plan[updatedPlanIndex] = action.payload.plan;
+        }
+
+        state.message = action.payload.message;
       });
   },
 });
