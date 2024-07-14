@@ -5,6 +5,7 @@ import cashoutReducer from "../features/Cashout/CashoutSlice.js";
 import supportReducer from "../features/Support/SupportSlice.js";
 import planReducer from "../features/Plan/PlanSlice.js";
 import workReducer from "../features/Work/WorkSlice.js";
+import commissionReducer from "../features/Commission/CommissionSlice.js";
 
 //create a store
 const store = configureStore({
@@ -15,6 +16,7 @@ const store = configureStore({
     support: supportReducer,
     plan: planReducer,
     work: workReducer,
+    commission: commissionReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: true,

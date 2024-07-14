@@ -19,7 +19,6 @@ function Cashout() {
 
   //get all cashout
   useEffect(() => {
-    //if user is login already
     dispatch(getAllCashout());
   }, [dispatch]);
 
@@ -53,7 +52,6 @@ function Cashout() {
         <thead>
           <tr>
             <th>SL</th>
-            <th>User Balance</th>
             <th>Method</th>
             <th>withdrawal Amount</th>
             <th>Ac.Number</th>
@@ -69,9 +67,6 @@ function Cashout() {
                 return (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>
-                      {data?.user?.myBalance && data?.user?.myBalance} BDT
-                    </td>
                     <td>{data?.method} </td>
                     <td>{data?.amount} BDT</td>
                     <td>{data?.accountNumber}</td>
