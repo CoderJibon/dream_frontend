@@ -171,16 +171,10 @@ button#delete {
   background-color: red;
   border-color: red;
 }
-<<<<<<< HEAD
 
 .thumbnils-img img {
   width: 50px;
   border-radius: 50px;
   height: 50px;
   object-fit: cover;
-=======
-select {
-  width: 100%;
-  padding: 5px;
->>>>>>> 5b53d7b58ea99b385aaf95d1e3ad33d2a514232b
 }

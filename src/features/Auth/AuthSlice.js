@@ -14,6 +14,7 @@ import {
   resetPassword,
   userEarning,
   userLogin,
+  userPassChange,
   userRegistration,
 } from "./AuthApiSlice.js";
 
@@ -236,6 +237,19 @@ const authSlice = createSlice({
         state.message = action.payload.message;
         state.user.myBalance += action.payload.earn;
         state.user.totalEarning = action.payload.totalEarning;
+      })
+      // user change password
+      .addCase(userPassChange.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(userPassChange.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.error.message;
+        
+      })
+      .addCase(userPassChange.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
       });
   },
 });

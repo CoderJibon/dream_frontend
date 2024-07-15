@@ -239,3 +239,26 @@ export const ProfileUpdate = createAsyncThunk(
     }
   }
 );
+
+// user  change password
+export const userPassChange = createAsyncThunk(
+  "auth/userPassChange",
+  async (data) => {
+
+    try {
+      const response = await axios.put(
+        `${baseUrl}/user/changeUserPassword`,
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+
+
+
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);

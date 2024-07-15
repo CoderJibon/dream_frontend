@@ -76,7 +76,7 @@ const EarnSection = () => {
                     </Link>
                   </div>
                   <div className="linktag">
-                    <Link className="linktag" to="/profile">
+                    <Link className="linktag" to="/changePassword">
                       <div className="iconPage">
                         <div className="icon-area">
                           <img

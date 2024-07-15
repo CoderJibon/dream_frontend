@@ -15,6 +15,7 @@ import Profile from "../pages/user/Profile/Profile.jsx";
 import Transection from "../pages/user/Transection/Transection.jsx";
 import PrivateGard from "./PrivateGard.jsx";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage.jsx";
+import ChangePassword from "../pages/user/ChangePassword/ChangePassword.jsx";
 const UserRouter = [
   {
     element: <PrivateGard />,
@@ -75,6 +76,10 @@ const UserRouter = [
       {
         path: "/transection",
         element: <Transection></Transection>,
+      },
+      {
+        path: "/changePassword",
+        element: <ChangePassword />,
       },
       {
         path: "*",
