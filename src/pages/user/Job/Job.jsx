@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FaCopy } from "react-icons/fa6";
 import "./Job.css";
 import { useSelector } from "react-redux";
+import { rootUrl } from "../../../utils/baseUrl.js";
 
 const Job = () => {
   const { isError, message, isLoading, user } = useSelector(
@@ -39,7 +40,7 @@ const Job = () => {
           type="text"
           className="jobinput"
           readOnly
-          defaultValue={`https://www.ustearn.com/signup/${
+          defaultValue={`${rootUrl}/signup/${
             user && user.userName
           }`}
         />

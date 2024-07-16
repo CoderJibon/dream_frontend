@@ -34,7 +34,6 @@ const Complaint = () => {
     },
     validationSchema: schema,
     onSubmit: (value) => {
-      console.log(value);
       dispatch(createSupport(value));
     },
   });

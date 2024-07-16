@@ -260,55 +260,34 @@ export const userPassChange = createAsyncThunk(
   }
 );
 
-// updateTimestamp
-export const updateTimestamp = createAsyncThunk(
-  "user/updateTimestamp",
-  async (id) => {
-    try {
-      const response = await axios.put(
-        `${baseUrl}/user/updateTimestamp`,
-        {
-          id: id,
-        },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      throw new Error(error.response.data.message);
-    }
-  }
-);
-
-//getTimestamp
-export const getTimestamp = createAsyncThunk(
-  "work/getTimestamp",
-  async ({ token }) => {
-    const response = await axios.get(`${baseUrl}/user/getTimestamp/${token}`, {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    return response.data;
-  }
-);
-
-// get All user
-export const getAllTimestamp = createAsyncThunk(
-  "auth/getAllTimestamp",
+// get All click Ads
+export const getAllClickAd = createAsyncThunk(
+  "auth/getAllClickAd",
   async () => {
     try {
-      const response = await axios.get(`${baseUrl}/user/getTimestamp`, {
+      const response = await axios.get(`${baseUrl}/user/getAllClickAd`, {
         withCredentials: true,
       });
       return response.data;
     } catch (error) {
       throw new Error(error.response.data.message);
     }
+  }
+);
+
+//checkClickAdToken
+export const checkClickAdToken = createAsyncThunk(
+  "work/checkClickAdToken",
+  async (data) => {
+    const response = await axios.put(
+      `${baseUrl}/user/checkClickAdToken`,
+      {
+        data,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
   }
 );

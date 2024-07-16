@@ -45,7 +45,7 @@ const CommissionSlice = createSlice({
       .addCase(updateCommission.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
-        console.log(action.payload.commission);
+
         // Find the index of the deposit to update
         const index = state.commission.findIndex(
           (dp) => dp._id === action.payload.commission._id

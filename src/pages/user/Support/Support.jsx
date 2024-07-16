@@ -59,7 +59,7 @@ const Support = () => {
                         {user?.support?.length > 0 &&
                           user?.support
                             ?.map((data, index) => {
-                              console.log(data);
+                              data;
                               return (
                                 <tr key={index}>
                                   <td>{index + 1}</td>

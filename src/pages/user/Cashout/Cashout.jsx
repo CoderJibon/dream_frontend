@@ -32,7 +32,7 @@ const Cashout = () => {
     },
     validationSchema: schema,
     onSubmit: (value) => {
-      console.log(value);
+      value;
       dispatch(createCashout(value));
     },
   });

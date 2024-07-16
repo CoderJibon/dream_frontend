@@ -6,9 +6,8 @@ import { useEffect, useState } from "react";
 import toastify from "../../../utils/toastify.jsx";
 import SyncLoader from "react-spinners/SyncLoader.js";
 import {
-  getAllTimestamp,
-  getTimestamp,
-  updateTimestamp,
+  getAllClickAd,
+  checkClickAdToken,
   userEarning,
 } from "../../../features/Auth/AuthApiSlice.js";
 import { setMessageEmpty } from "../../../features/Auth/AuthSlice.js";
@@ -16,33 +15,26 @@ const Work = () => {
   //dispatch via call api
   const dispatch = useDispatch();
   const { work } = useSelector((state) => state.work);
-  const { isError, message, isLoading, user, Timestamp24 } = useSelector(
+  const { isError, message, isLoading, user, clickAd } = useSelector(
     (state) => state.auth
   );
 
   //get all work
   useEffect(() => {
     dispatch(getAllWork());
-    dispatch(getAllTimestamp());
+    dispatch(getAllClickAd());
   }, [dispatch]);
 
-  // Check if the ad is already taken and expired then remove the data
+  //Check if expired data then remove it
   useEffect(() => {
-    if (Timestamp24?.length > 0) {
-      console.log(Timestamp24);
-      Timestamp24.forEach((ad) => {
-        if (ad?.adID !== work._id) {
-          console.log(ad?.adID !== work._id);
-          dispatch(getTimestamp({ token: ad.token24h }));
-        }
-      });
+    if (clickAd?.length > 0) {
+      dispatch(checkClickAdToken(clickAd));
     }
-  }, [dispatch, Timestamp24]);
+  }, [dispatch, clickAd]);
 
   //get user Earning
   const handleEarnBtn = ({ name, id }) => {
-    dispatch(userEarning({ name: name }));
-    dispatch(updateTimestamp(id));
+    dispatch(userEarning({ name: name, id }));
   };
 
   // message loading
@@ -84,8 +76,8 @@ const Work = () => {
       <div className="total-body-area p-3">
         {work &&
           work.map((w, idx) => {
-            // Check if this work ID exists in the user's Timestamp24
-            const isDisabled = Timestamp24.some((ad) => ad.adID === w._id);
+            // Check if this work ID exists in the user's clickAd
+            const isDisabled = clickAd.some((ad) => ad.adID === w._id);
 
             return (
               <div key={idx} className="workcontainer">
