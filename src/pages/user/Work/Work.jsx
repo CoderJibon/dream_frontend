@@ -18,6 +18,14 @@ const Work = () => {
   const { isError, message, isLoading, user, clickAd } = useSelector(
     (state) => state.auth
   );
+  // Initialize state
+  const [limited, setLimited] = useState(3);
+  //get all work
+  useEffect(() => {
+    if (user.myPlan) {
+      setLimited(user.myPlan.dailyAdvertisement);
+    }
+  }, [user, limited]);
 
   //get all work
   useEffect(() => {
@@ -75,10 +83,10 @@ const Work = () => {
       </header>
       <div className="total-body-area p-3">
         {work &&
-          work.map((w, idx) => {
+          work.length > 0 &&
+          work.slice(0, limited).map((w, idx) => {
             // Check if this work ID exists in the user's clickAd
             const isDisabled = clickAd.some((ad) => ad.adID === w._id);
-
             return (
               <div key={idx} className="workcontainer">
                 <div className="workflex">
@@ -86,6 +94,7 @@ const Work = () => {
                     <img
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDm0UHQCQhPHtw4D0r3Ey7gd6oRWqqq12k2V-S5kx_gnYk_O9W-fnEOQVbc1CMrJeFIAI&amp;usqp=CAU"
                       className="workimg"
+                      alt={w.name}
                     />
                     <p>{w.name}</p>
                   </div>

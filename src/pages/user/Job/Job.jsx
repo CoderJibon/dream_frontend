@@ -5,9 +5,7 @@ import { useSelector } from "react-redux";
 import { refUrl } from "../../../utils/baseUrl.js";
 
 const Job = () => {
-  const { isError, message, isLoading, user } = useSelector(
-    (state) => state.auth
-  );
+  const { user } = useSelector((state) => state.auth);
   const copyLink = (e) => {
     e.preventDefault();
     const copyText = document.querySelector(".jobinput");
