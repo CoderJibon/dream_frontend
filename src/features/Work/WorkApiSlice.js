@@ -63,7 +63,6 @@ export const getASingleWork = createAsyncThunk(
 );
 
 // delete a work
-
 export const deleteAWork = createAsyncThunk("Work/deleteAWork", async (id) => {
   try {
     const response = await axios.delete(`${baseUrl}/work/${id}`, {

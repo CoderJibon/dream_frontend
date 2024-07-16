@@ -244,7 +244,6 @@ export const ProfileUpdate = createAsyncThunk(
 export const userPassChange = createAsyncThunk(
   "auth/userPassChange",
   async (data) => {
-
     try {
       const response = await axios.put(
         `${baseUrl}/user/changeUserPassword`,
@@ -254,8 +253,59 @@ export const userPassChange = createAsyncThunk(
         }
       );
 
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);
 
+// updateTimestamp
+export const updateTimestamp = createAsyncThunk(
+  "user/updateTimestamp",
+  async (id) => {
+    try {
+      const response = await axios.put(
+        `${baseUrl}/user/updateTimestamp`,
+        {
+          id: id,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);
 
+//getTimestamp
+export const getTimestamp = createAsyncThunk(
+  "work/getTimestamp",
+  async ({ token }) => {
+    const response = await axios.get(`${baseUrl}/user/getTimestamp/${token}`, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  }
+);
+
+// get All user
+export const getAllTimestamp = createAsyncThunk(
+  "auth/getAllTimestamp",
+  async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/user/getTimestamp`, {
+        withCredentials: true,
+      });
       return response.data;
     } catch (error) {
       throw new Error(error.response.data.message);

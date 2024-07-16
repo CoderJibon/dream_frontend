@@ -5,13 +5,16 @@ import {
   createDeposit,
   createSupport,
   forgotPassword,
+  getAllTimestamp,
   getAllUser,
+  getTimestamp,
   loggedInUser,
   logout,
   mailVerification,
   ProfileUpdate,
   resetEmailMail,
   resetPassword,
+  updateTimestamp,
   userEarning,
   userLogin,
   userPassChange,
@@ -24,6 +27,7 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("user"))
     : null,
   users: [],
+  Timestamp24: [],
   isLoading: false,
   isError: null,
   message: null,
@@ -245,11 +249,50 @@ const authSlice = createSlice({
       .addCase(userPassChange.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.error.message;
-        
       })
       .addCase(userPassChange.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.message;
+      }) //updateTimestamp
+      .addCase(updateTimestamp.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(updateTimestamp.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.error.message;
+      })
+      .addCase(updateTimestamp.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload.message;
+        state.Timestamp24.push(action.payload.time);
+      })
+      //getTimestamp
+      .addCase(getTimestamp.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getTimestamp.rejected, (state, action) => {
+        state.isLoading = false;
+        //state.isError = action.error.message;
+      })
+      .addCase(getTimestamp.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = null;
+        console.log("getTime = " + action.payload.Timestamp24);
+        state.Timestamp24 = action.payload.Timestamp24;
+      })
+      //get all AllTimestamp
+      .addCase(getAllTimestamp.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllTimestamp.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.error.message;
+      })
+      .addCase(getAllTimestamp.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = null;
+        console.log(action.payload);
+        state.Timestamp24 = action.payload.Timestamp24;
       });
   },
 });
