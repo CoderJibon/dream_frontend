@@ -86,7 +86,7 @@ const Work = () => {
           work.length > 0 &&
           work.slice(0, limited).map((w, idx) => {
             // Check if this work ID exists in the user's clickAd
-            const isDisabled = clickAd.some((ad) => ad.adID === w._id);
+            const isDisabled = clickAd.some((ad) => ad.Email === user.email);
             return (
               <div key={idx} className="workcontainer">
                 <div className="workflex">
