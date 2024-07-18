@@ -1,6 +1,7 @@
 {
   "name": "dream_frontend",
   "private": true,
+  "homepage": "http://dreamglobalinternational.org",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

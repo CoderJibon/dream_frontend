@@ -31,13 +31,17 @@ const Footer = () => {
                   />
                   <p>Total Earn</p>
                 </Link>
-                <Link to="/telegram" className="f-icon  homelink">
+                <a
+                  href="https://t.me/dream_global_international"
+                  className="f-icon  homelink"
+                  target="-blank"
+                >
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png"
                     alt=""
                   />
                   <p>Telegram</p>
-                </Link>
+                </a>
                 <Link to="/profile" className="f-icon homelink ">
                   <img
                     src="https://www.pngkey.com/png/full/966-9665347_icon-profile-circle.png"
