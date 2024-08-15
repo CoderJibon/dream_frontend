@@ -68,7 +68,7 @@ const Resendmail = () => {
               value={formik.values.email}
             />
             <button className={styles.loginButton} type="submit">
-              Login
+              Resend Variation Email
             </button>
             <p className={styles.label}>
               Don't have an account? <Link to="/">Sign Up</Link> Or{" "}

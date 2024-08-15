@@ -11,7 +11,9 @@ const Plan = () => {
   //dispatch via call api
   const dispatch = useDispatch();
   const { plan } = useSelector((state) => state.plan);
-  const { isError, message, isLoading } = useSelector((state) => state.auth);
+  const { isError, message, isLoading, user } = useSelector(
+    (state) => state.auth
+  );
 
   //get all plan
   useEffect(() => {
@@ -58,6 +60,32 @@ const Plan = () => {
           </div>
         </div>
       </header>
+      <div className="body">
+        <h2 style={{ textAlign: "center" }}>Active Plan</h2>
+        <table class="earntable">
+          <thead>
+            <tr>
+              <th>Plan Name</th>
+              <th>Plan Price</th>
+              <th>Plan Validity</th>
+            </tr>
+
+            {user?.myPlan ? (
+              <tr>
+                <td>{user.myPlan.name}</td>
+                <td>{user.myPlan.price}</td>
+                <td>{user.myPlan.validity} Days</td>
+              </tr>
+            ) : (
+              <tr>
+                <td colSpan="3">No Plan Available</td>
+              </tr>
+            )}
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <h2 style={{ textAlign: "center" }}>Buy A Plan</h2>
       <div className="allplan">
         {plan &&
           plan.map((plan, idx) => (

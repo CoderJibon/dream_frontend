@@ -66,12 +66,9 @@ export const mailVerification = createAsyncThunk(
   "auth/mailVerification",
   async ({ token }) => {
     try {
-      const response = await axios.get(
-        `http://localhost:5050/api/v1/auth/Login/${token}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.get(`${baseUrl}/auth/Login/${token}`, {
+        withCredentials: true,
+      });
       return response.data;
     } catch (error) {
       throw new Error(error.response.data.message);

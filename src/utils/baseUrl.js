@@ -1,6 +1,6 @@
 //server base url
-export const baseUrl = "http://localhost:5050/api/v1";
+export const baseUrl = "https://backend.dreamglobalinternational.org/api/v1";
 
-export const rootUrl = "http://localhost:5050";
+export const rootUrl = "https://backend.dreamglobalinternational.org";
 //ref url
 export const refUrl = "http://dreamglobalinternational.org";
